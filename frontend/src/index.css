@@ -1,0 +1,257 @@
+/* Web fonts. We load the two families from Google Fonts via @import so
+   they're cached by the browser and don't need a manual link tag in
+   index.html. Fraunces is the serif used for headlines; Inter is the
+   default body sans. Must precede Tailwind directives per CSS spec. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   AGROCONNECT — DESIGN SYSTEM BASE
+   ----------------------------------------------------------------------------
+   Three concerns live here:
+     1. Type & color tokens (the design system extends Tailwind's tokens
+        via tailwind.config.js, so we don't redefine them here).
+     2. The "humanist base" — what every screen looks like at minimum.
+        A warm ivory page, dark ink body text, gentle focus rings, and
+        sensible form defaults.
+     3. The "calm motion" — a single prefers-reduced-motion override that
+        disables every animation/transition site-wide. We respect the
+        user, every time.
+   ============================================================================= */
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #faf6ef; /* earth-50 — the page ground */
+  color: #1a1a18;           /* ink-800  — body text */
+}
+
+/* Web fonts moved above Tailwind directives — see top of file. */
+
+/* Selection color — warm honey, not browser default blue. */
+::selection {
+  background-color: #f2d97e; /* honey-200 */
+  color: #1a1a18;            /* ink-800 */
+}
+
+/* =============================================================================
+   HUMANIST BASE — applied to body/html, picked up by everything.
+   ============================================================================= */
+
+@layer base {
+  /* Page-level layout guard. App.jsx already provides a min-h-screen
+     container, but this guarantees the page fills the viewport even
+     when a child returns null during a route transition. */
+  html, body, #root { min-height: 100vh; }
+
+  /* Headings default to the serif display family. This is what makes
+     the app feel "made", not "templated". */
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    color: #0e0e0d; /* ink-900 */
+    letter-spacing: -0.01em;
+  }
+  h1 { font-weight: 500; }
+  h2 { font-weight: 500; }
+  h3 { font-weight: 500; }
+  h4 { font-weight: 600; }
+
+  /* Form elements: the same border, focus, and disabled look across
+     the app. We never override these per-page. */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="url"],
+  input[type="search"],
+  select,
+  textarea {
+    @apply w-full rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm text-ink-800 placeholder:text-ink-400
+           focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200
+           disabled:bg-ink-50 disabled:text-ink-400;
+  }
+
+  /* Subtle motion on focus that doesn't move the layout. */
+  input, select, textarea, button {
+    transition: border-color 180ms cubic-bezier(0.22, 0.61, 0.36, 1),
+                box-shadow 180ms cubic-bezier(0.22, 0.61, 0.36, 1),
+                background-color 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  /* Use the named transition-timing-function utility on the
+     long-form transition-* properties so we get a single
+     easing curve across the app. */
+  .ac-transition {
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-duration: 180ms;
+  }
+
+  /* Native checkbox/radio should match the rest. */
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: #2f6230; /* primary-600 */
+  }
+
+  /* Subtle scrollbar that doesn't compete with content. */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: #d6d6d2; /* ink-200 */
+    border-radius: 999px;
+    border: 2px solid #faf6ef; /* earth-50 */
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #b3b3ad; /* ink-300 */ }
+}
+
+/* =============================================================================
+   SHARED COMPONENT PRIMITIVES — small building blocks used in many pages.
+   Keeping them here (instead of an external lib) so we don't add a
+   shadcn-style runtime dep.
+   ============================================================================= */
+
+@layer components {
+  /* The single card style. Every card on the app is built on this
+     class so a single change here propagates everywhere. */
+  .ac-card {
+    @apply rounded-card border border-earth-200 bg-white shadow-card;
+  }
+  .ac-card-hover {
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover;
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Primary action button. The high-contrast variant for "Add crop
+     lot", "Submit", "Accept offer". */
+  .ac-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white shadow-sm
+           transition-all duration-200
+           hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2 focus:ring-offset-earth-50
+           disabled:cursor-not-allowed disabled:opacity-50;
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Secondary action — used for "Cancel", "View all", "Edit". */
+  .ac-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-700
+           transition-all duration-200
+           hover:bg-earth-50 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2 focus:ring-offset-earth-50
+           disabled:cursor-not-allowed disabled:opacity-50;
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Ghost action — only visible on hover, used in tight lists. */
+  .ac-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-ink-600
+           transition-all duration-200
+           hover:bg-earth-100 hover:text-ink-800 focus:outline-none focus:ring-2 focus:ring-primary-200;
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Destructive / "sell now" / reject. */
+  .ac-btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-rust-400 px-4 py-2 text-sm font-medium text-white shadow-sm
+           transition-all duration-200
+           hover:bg-rust-500 focus:outline-none focus:ring-2 focus:ring-rust-200 focus:ring-offset-2 focus:ring-offset-earth-50
+           disabled:cursor-not-allowed disabled:opacity-50;
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* "Chip" — a small inline status tag. */
+  .ac-chip {
+    @apply inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-xs font-medium;
+  }
+  .ac-chip-primary { @apply bg-primary-100 text-primary-800; }
+  .ac-chip-success { @apply bg-success-100 text-success-600; }
+  .ac-chip-honey   { @apply bg-honey-100 text-honey-700; }
+  .ac-chip-rust    { @apply bg-rust-100 text-rust-600; }
+  .ac-chip-ink     { @apply bg-ink-100 text-ink-600; }
+  .ac-chip-earth   { @apply bg-earth-100 text-earth-700; }
+
+  /* The single container width for content pages. 6xl keeps the
+     "editorial" feel without making wide screens feel empty. */
+  .ac-container {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Section label used at the top of every page-section. */
+  .ac-section-label {
+    @apply text-xs font-semibold uppercase tracking-wider text-ink-400;
+  }
+
+  /* Skeleton — used during loading. Animates a soft honey shimmer. */
+  .ac-skeleton {
+    @apply rounded-md bg-earth-100;
+    background-image: linear-gradient(90deg, transparent 0%, rgba(242, 217, 126, 0.18) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2.4s linear infinite;
+  }
+
+  /* Stagger helper: each direct child rises in sequence. Used on
+     card grids so a list "settles in" rather than appearing at
+     once. Pair with Tailwind's animate-fade-in. */
+  .ac-stagger > * {
+    animation: rise-in 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .ac-stagger > *:nth-child(1)  { animation-delay: 30ms; }
+  .ac-stagger > *:nth-child(2)  { animation-delay: 70ms; }
+  .ac-stagger > *:nth-child(3)  { animation-delay: 110ms; }
+  .ac-stagger > *:nth-child(4)  { animation-delay: 150ms; }
+  .ac-stagger > *:nth-child(5)  { animation-delay: 190ms; }
+  .ac-stagger > *:nth-child(6)  { animation-delay: 230ms; }
+  .ac-stagger > *:nth-child(7)  { animation-delay: 270ms; }
+  .ac-stagger > *:nth-child(8)  { animation-delay: 310ms; }
+  .ac-stagger > *:nth-child(n+9){ animation-delay: 350ms; }
+
+  /* Press feedback for interactive surfaces. Subtle, doesn't move
+     layout. Use as a Tailwind arbitrary class via
+     active:ac-press. */
+  .ac-press:active { transform: scale(0.985); }
+
+  /* Status change pulse — used when a status badge changes colour
+     (e.g. offer moves from OPEN -> ACCEPTED). The visual draws the
+     eye to the change without being loud. */
+  .ac-status-change { animation: scale-in 260ms cubic-bezier(0.18, 0.89, 0.32, 1.0) both; }
+}
+
+/* =============================================================================
+   MOTION — respect prefers-reduced-motion globally. We never use big,
+   decorative animations; we use gentle fades and a 1px lift on hover.
+   Users who prefer reduced motion see none of it.
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Star-rating / tiny inline glyph: an old seedling mark used as the
+   brand glyph across the app. */
+.ac-seedling {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 6 6 9 6 13a6 6 0 0 0 12 0c0-4-2-7-6-11Zm0 5c2 2 3 4 3 6a3 3 0 0 1-6 0c0-2 1-4 3-6Z'/></svg>") no-repeat center / contain;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 6 6 9 6 13a6 6 0 0 0 12 0c0-4-2-7-6-11Zm0 5c2 2 3 4 3 6a3 3 0 0 1-6 0c0-2 1-4 3-6Z'/></svg>") no-repeat center / contain;
+}

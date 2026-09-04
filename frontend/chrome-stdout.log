@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>PriceTrendChart runtime hook test</title>
+    <style>
+      body { font-family: system-ui, -apple-system, sans-serif; background: #faf6ee; padding: 12px; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/__runtime_test__/PriceTrendChart.runtime.test.jsx"></script>
+  
+
+</body></html>

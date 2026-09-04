@@ -1,0 +1,273 @@
+{
+  "totals": {
+    "total_jobs": 12,
+    "jobs_done": 12,
+    "ok": 12,
+    "skipped": 0,
+    "failed": 0,
+    "total_records": 6762,
+    "total_inserted": 6762,
+    "total_updated": 0,
+    "total_flagged": 0,
+    "soft_flag_total": {
+      "missing_or_invalid_modal_price": 6762
+    },
+    "hard_flag_total": {},
+    "mongodb_mode": "memory",
+    "mongodb_uri_host": "127.0.0.1:52502",
+    "durationMs": 19936,
+    "dryRun": false,
+    "onlyMissing": true,
+    "window": "2023-01 → 2023-03",
+    "commodities": [
+      "Onion",
+      "Potato"
+    ],
+    "states": [
+      "Maharashtra",
+      "Karnataka"
+    ]
+  },
+  "perJob": [
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "commodity": "Onion",
+      "commodityId": "23",
+      "year": 2023,
+      "month": 1,
+      "status": "ok",
+      "records": 862,
+      "inserted": 862,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 3026,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 862
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "commodity": "Onion",
+      "commodityId": "23",
+      "year": 2023,
+      "month": 2,
+      "status": "ok",
+      "records": 1163,
+      "inserted": 1163,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 3430,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 1163
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "commodity": "Onion",
+      "commodityId": "23",
+      "year": 2023,
+      "month": 3,
+      "status": "ok",
+      "records": 1348,
+      "inserted": 1348,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 3734,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 1348
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "commodity": "Potato",
+      "commodityId": "24",
+      "year": 2023,
+      "month": 1,
+      "status": "ok",
+      "records": 436,
+      "inserted": 436,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 1195,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 436
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "commodity": "Potato",
+      "commodityId": "24",
+      "year": 2023,
+      "month": 2,
+      "status": "ok",
+      "records": 615,
+      "inserted": 615,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 1677,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 615
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "commodity": "Potato",
+      "commodityId": "24",
+      "year": 2023,
+      "month": 3,
+      "status": "ok",
+      "records": 646,
+      "inserted": 646,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 1653,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 646
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "commodity": "Onion",
+      "commodityId": "23",
+      "year": 2023,
+      "month": 1,
+      "status": "ok",
+      "records": 316,
+      "inserted": 316,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 1036,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 316
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "commodity": "Onion",
+      "commodityId": "23",
+      "year": 2023,
+      "month": 2,
+      "status": "ok",
+      "records": 265,
+      "inserted": 265,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 893,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 265
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "commodity": "Onion",
+      "commodityId": "23",
+      "year": 2023,
+      "month": 3,
+      "status": "ok",
+      "records": 310,
+      "inserted": 310,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 1050,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 310
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "commodity": "Potato",
+      "commodityId": "24",
+      "year": 2023,
+      "month": 1,
+      "status": "ok",
+      "records": 277,
+      "inserted": 277,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 782,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 277
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "commodity": "Potato",
+      "commodityId": "24",
+      "year": 2023,
+      "month": 2,
+      "status": "ok",
+      "records": 250,
+      "inserted": 250,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 712,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 250
+      },
+      "hardFlagReasons": {}
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "commodity": "Potato",
+      "commodityId": "24",
+      "year": 2023,
+      "month": 3,
+      "status": "ok",
+      "records": 274,
+      "inserted": 274,
+      "updated": 0,
+      "skipped": 0,
+      "flagged": 0,
+      "durationMs": 748,
+      "error": null,
+      "softFlagCount": {
+        "missing_or_invalid_modal_price": 274
+      },
+      "hardFlagReasons": {}
+    }
+  ]
+}

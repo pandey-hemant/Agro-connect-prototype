@@ -1,0 +1,10 @@
+# Python 3.14 compatible versions (2026-08-28)
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.13.4  # Need to check if this works with Python 3.14
+pydantic-settings==2.7.1
+SQLAlchemy==2.0.36
+python-dotenv==1.0.1
+
+# Note: The typing.Union error suggests Pydantic 2.13.4 may be incompatible with Python 3.14
+# We may need to use a newer version of Pydantic that supports Python 3.14

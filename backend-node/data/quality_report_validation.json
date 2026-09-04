@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2026-09-01T05:37:47.391Z",
+  "totals": {
+    "totalRows": 7520,
+    "bySource": {
+      "agmarknet": 7520
+    },
+    "distinctCrops": 2,
+    "distinctStates": 2,
+    "coverageGroups": 4,
+    "suspiciousRows": 1,
+    "duplicateGroups": 0
+  },
+  "perSource": [
+    {
+      "_id": "agmarknet",
+      "n": 7520
+    }
+  ],
+  "coverage": [
+    {
+      "n": 1198,
+      "firstDate": "2023-01-01",
+      "lastDate": "2023-03-31",
+      "crop": "Onion",
+      "state": "Karnataka",
+      "source": "agmarknet",
+      "distinctMarkets": 33
+    },
+    {
+      "n": 3704,
+      "firstDate": "2023-01-01",
+      "lastDate": "2023-03-31",
+      "crop": "Onion",
+      "state": "Maharashtra",
+      "source": "agmarknet",
+      "distinctMarkets": 85
+    },
+    {
+      "n": 921,
+      "firstDate": "2023-01-01",
+      "lastDate": "2023-03-31",
+      "crop": "Potato",
+      "state": "Karnataka",
+      "source": "agmarknet",
+      "distinctMarkets": 26
+    },
+    {
+      "n": 1697,
+      "firstDate": "2023-01-01",
+      "lastDate": "2023-03-31",
+      "crop": "Potato",
+      "state": "Maharashtra",
+      "source": "agmarknet",
+      "distinctMarkets": 37
+    }
+  ],
+  "suspiciousSample": [
+    {
+      "_id": "6a965864b60102b67c406e68",
+      "source": "agmarknet",
+      "market": "Junnar(Alephata) APMC",
+      "cropName": "Onion",
+      "state": "Maharashtra",
+      "arrivals": 23,
+      "priceDate": "2023-02-23",
+      "pricePerKg": 750,
+      "pricePerQuintal": 75000,
+      "reasons": [
+        "price_per_kg_too_high"
+      ]
+    }
+  ],
+  "duplicateGroups": []
+}

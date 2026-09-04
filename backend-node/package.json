@@ -1,0 +1,31 @@
+{
+  "name": "agroconnect-backend-node",
+  "version": "1.0.0",
+  "description": "AgroConnect backend — Node/Express/MongoDB migration. Replaces FastAPI + SQLite with the same /api/* contract.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "start:seed": "node scripts/start_with_seed.cjs",
+    "verify": "node scripts/verify_e2e.cjs",
+    "verify:A-I": "node tests/verify_A_to_I.cjs",
+    "test": "node tests/verify_A_to_I.cjs",
+    "failtest": "node scripts/verify_failures.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb-memory-server": "^10.1.2",
+    "mongoose": "^8.7.0"
+  },
+  "allowScripts": {
+    "mongodb-memory-server@10.4.3": true
+  }
+}

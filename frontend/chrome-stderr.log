@@ -1,0 +1,5 @@
+[5792:19176:0902/171500.855:INFO:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:241] No machine level policy manager exists.
+[5792:19176:0902/171501.266:INFO:CONSOLE:495] "[vite] connecting...", source: http://localhost:5173/@vite/client (495)
+[5792:19176:0902/171501.282:INFO:CONSOLE:21551] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://localhost:5173/node_modules/.vite/deps/chunk-NUMECXU6.js?v=48198071 (21551)
+[5792:19176:0902/171501.304:INFO:CONSOLE:8] "Uncaught Error: @vitejs/plugin-react can't detect preamble. Something is wrong.", source: http://localhost:5173/src/components/Skeleton.jsx (8)
+[5792:19176:0902/171501.306:INFO:CONSOLE:618] "[vite] connected.", source: http://localhost:5173/@vite/client (618)

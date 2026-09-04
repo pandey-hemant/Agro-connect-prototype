@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroConnect - Farmer Decision Support</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+      color: white;
+      padding: 30px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      opacity: 0.9;
+      font-size: 0.95em;
+    }
+
+    .journey-steps {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      font-size: 0.85em;
+    }
+
+    .step::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #97bc62;
+      font-size: 1.2em;
+    }
+
+    .step:last-child::after {
+      content: '';
+    }
+
+    .step.active {
+      color: #2c5f2d;
+      font-weight: 600;
+    }
+
+    .step-number {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      color: white;
+      margin-bottom: 5px;
+    }
+
+    .step.active .step-number {
+      background: #2c5f2d;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .card h2 {
+      color: #2c5f2d;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: #97bc62;
+    }
+
+    button {
+      background: #2c5f2d;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #1e3f1f;
+    }
+
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .prediction-card {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-left: 4px solid #2c5f2d;
+      padding: 20px;
+      border-radius: 4px;
+      margin: 15px 0;
+    }
+
+    .prediction-main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .prediction-stat {
+      text-align: center;
+    }
+
+    .prediction-stat .label {
+      font-size: 0.85em;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .prediction-stat .value {
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #2c5f2d;
+      margin: 5px 0;
+    }
+
+    .trend-up { color: #28a745; }
+    .trend-down { color: #dc3545; }
+    .trend-flat { color: #6c757d; }
+
+    .confidence-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: 500;
+    }
+
+    .confidence-high { background: #d4edda; color: #155724; }
+    .confidence-medium { background: #fff3cd; color: #856404; }
+    .confidence-low { background: #f8d7da; color: #721c24; }
+
+    .alert {
+      padding: 15px;
+      border-radius: 4px;
+      margin: 15px 0;
+    }
+
+    .alert-warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      color: #856404;
+    }
+
+    .alert-info {
+      background: #d1ecf1;
+      border-left: 4px solid #17a2b8;
+      color: #0c5460;
+    }
+
+    .disclaimer {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+      margin-top: 10px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+
+    .net-calculator {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 4px;
+      margin: 15px 0;
+    }
+
+    .net-result {
+      background: white;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 15px;
+      border-left: 4px solid #2c5f2d;
+    }
+
+    .net-result .amount {
+      font-size: 1.5em;
+      font-weight: 600;
+      color: #2c5f2d;
+    }
+
+    .offer-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .offer-card {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 15px;
+      transition: border-color 0.2s;
+    }
+
+    .offer-card.best {
+      border-color: #2c5f2d;
+      background: #f0f8f0;
+    }
+
+    .offer-type {
+      font-size: 0.9em;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .offer-price {
+      font-size: 1.5em;
+      font-weight: 600;
+      color: #2c5f2d;
+      margin: 5px 0;
+    }
+
+    .offer-details {
+      font-size: 0.85em;
+      color: #666;
+    }
+
+    .recommendation {
+      background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .recommendation h3 {
+      margin-bottom: 10px;
+      font-size: 1.3em;
+    }
+
+    .recommendation .action {
+      font-size: 1.8em;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #2c5f2d;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🌾 AgroConnect</h1>
+      <p class="subtitle">Smart Farming Decisions Powered by AI</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Journey Steps -->
+    <div class="journey-steps">
+      <div class="step active" data-step="1">
+        <div class="step-number">1</div>
+        <div>Select Crop</div>
+      </div>
+      <div class="step active" data-step="2">
+        <div class="step-number">2</div>
+        <div>Market Prices</div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-number">3</div>
+        <div>ML Prediction</div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="step-number">4</div>
+        <div>Quantity</div>
+      </div>
+      <div class="step" data-step="5">
+        <div class="step-number">5</div>
+        <div>Compare Offers</div>
+      </div>
+      <div class="step" data-step="6">
+        <div class="step-number">6</div>
+        <div>Net Realization</div>
+      </div>
+      <div class="step" data-step="7">
+        <div class="step-number">7</div>
+        <div>Action</div>
+      </div>
+    </div>
+
+    <!-- Step 1: Crop Selection -->
+    <div class="card">
+      <h2>Step 1: Select Your Crop & Location</h2>
+      <div class="form-group">
+        <label for="cropSelect">Crop</label>
+        <select id="cropSelect">
+          <option value="">-- Select Crop --</option>
+          <option value="Onion">Onion</option>
+          <option value="Potato">Potato</option>
+          <option value="Tomato">Tomato</option>
+          <option value="Wheat">Wheat</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="stateSelect">State</label>
+        <select id="stateSelect">
+          <option value="">-- Select State --</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Punjab">Punjab</option>
+        </select>
+      </div>
+      <button id="loadPricesBtn" disabled>Load Market Prices →</button>
+    </div>
+
+    <!-- Step 2: Current Market Prices -->
+    <div id="marketPricesSection" class="card hidden">
+      <h2>Step 2: Current Market Prices</h2>
+      <div id="marketPricesContent">
+        <div class="loading"><div class="spinner"></div> Loading market prices...</div>
+      </div>
+    </div>
+
+    <!-- Step 3: ML Prediction -->
+    <div id="mlPredictionSection" class="card hidden">
+      <h2>Step 3: AI-Powered Price Prediction</h2>
+      <div id="mlPredictionContent">
+        <div class="loading"><div class="spinner"></div> Generating prediction...</div>
+      </div>
+    </div>
+
+    <!-- Step 4: Quantity Input -->
+    <div id="quantitySection" class="card hidden">
+      <h2>Step 4: Enter Your Quantity</h2>
+      <div class="form-group">
+        <label for="quantityInput">Quantity (kg)</label>
+        <input type="number" id="quantityInput" min="1" step="1" placeholder="Enter quantity in kg" value="1000">
+      </div>
+      <button id="calculateNetBtn">Calculate Net Realization →</button>
+    </div>
+
+    <!-- Step 5: Offer Comparison -->
+    <div id="offerComparisonSection" class="card hidden">
+      <h2>Step 5: Compare Your Options</h2>
+      <div id="offerComparisonContent">
+        <div class="loading"><div class="spinner"></div> Loading options...</div>
+      </div>
+    </div>
+
+    <!-- Step 6: Net Realization -->
+    <div id="netRealizationSection" class="card hidden">
+      <h2>Step 6: Your Net Realization</h2>
+      <div id="netRealizationContent"></div>
+    </div>
+
+    <!-- Step 7: Recommendation -->
+    <div id="recommendationSection" class="card hidden">
+      <div id="recommendationContent"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

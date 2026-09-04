@@ -1,0 +1,25 @@
+cropName,market,state,district,pricePerQuintal,pricePerKg,minPricePerKg,maxPricePerKg,priceDate,source
+Tomato,Patna Mandi,Bihar,Patna,1700,17,16,18,2026-08-20,csv
+Tomato,Patna Mandi,Bihar,Patna,1750,17.5,16.5,18.5,2026-08-27,csv
+Tomato,Bengaluru APMC,Karnataka,Bengaluru,1500,15,14,16,2026-08-20,csv
+Tomato,Bengaluru APMC,Karnataka,Bengaluru,1550,15.5,14.5,16.5,2026-08-27,csv
+Onion,Nashik APMC,Maharashtra,Nashik,2200,22,20,24,2026-08-20,csv
+Onion,Nashik APMC,Maharashtra,Nashik,2250,22.5,20.5,24.5,2026-08-27,csv
+Onion,Lasalgaon,Maharashtra,Nashik,2400,24,22,26,2026-08-20,csv
+Onion,Lasalgaon,Maharashtra,Nashik,2450,24.5,22.5,26.5,2026-08-27,csv
+Potato,Agra Mandi,Uttar Pradesh,Agra,1200,12,11,13,2026-08-20,csv
+Potato,Agra Mandi,Uttar Pradesh,Agra,1250,12.5,11.5,13.5,2026-08-27,csv
+Wheat,Amritsar Mandi,Punjab,Amritsar,2800,28,26,30,2026-08-20,csv
+Wheat,Amritsar Mandi,Punjab,Amritsar,2850,28.5,26.5,30.5,2026-08-27,csv
+Rice,Karnal Mandi,Haryana,Karnal,3500,35,33,37,2026-08-20,csv
+Rice,Karnal Mandi,Haryana,Karnal,3550,35.5,33.5,37.5,2026-08-27,csv
+Maize,Davangere,Karnataka,Davangere,2300,23,21,25,2026-08-20,csv
+Maize,Davangere,Karnataka,Davangere,2350,23.5,21.5,25.5,2026-08-27,csv
+Soybean,Indore Mandi,Madhya Pradesh,Indore,4800,48,46,50,2026-08-20,csv
+Soybean,Indore Mandi,Madhya Pradesh,Indore,4900,49,47,51,2026-08-27,csv
+Cotton,Rajkot,Gujarat,Rajkot,6500,65,62,68,2026-08-20,csv
+Cotton,Rajkot,Gujarat,Rajkot,6600,66,63,69,2026-08-27,csv
+Groundnut,Junagadh,Gujarat,Junagadh,7200,72,69,75,2026-08-20,csv
+Groundnut,Junagadh,Gujarat,Junagadh,7300,73,70,76,2026-08-27,csv
+Chilli,Guntur,Andhra Pradesh,Guntur,18000,180,170,190,2026-08-20,csv
+Chilli,Guntur,Andhra Pradesh,Guntur,18200,182,172,192,2026-08-27,csv
