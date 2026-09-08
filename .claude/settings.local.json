@@ -44,7 +44,8 @@
       "Bash(python3 -c \"import sys, json; d = json.load\\(sys.stdin\\); paths = sorted\\(d['paths'].keys\\(\\)\\); print\\('\\\\n'.join\\(paths\\)\\)\")",
       "Bash(.venv/Scripts/python.exe -c \"from app.main import app; print\\('OK', app.title\\)\")",
       "Bash(.venv/Scripts/python.exe *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "PowerShell(git checkout *)"
     ]
   }
 }

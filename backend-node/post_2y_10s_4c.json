@@ -1,0 +1,110 @@
+{
+  "capturedAt": "2026-09-07T13:21:23.890Z",
+  "total": 1557935,
+  "sampled": 10,
+  "hashes": [
+    {
+      "_id": "6a965860b60102b67c4069a9",
+      "cropName": "Onion",
+      "state": "Maharashtra",
+      "market": "AGRICULTURE PRODUCE MARKET COMITEE CHANDWAD",
+      "priceDate": "2023-01-02",
+      "variety": "Red",
+      "hash": "2a42b8f9e63b7c29ddd635a67f16be842c0625db8899bc6c86b2cb7f5258c355"
+    },
+    {
+      "_id": "6a9eb834b60102b67c582f7d",
+      "cropName": "Green Chilli",
+      "state": "Karnataka",
+      "market": "T. Narasipura APMC",
+      "priceDate": "2025-12-15",
+      "variety": "Green Chilly",
+      "hash": "4f442886e15e338e591a0146481534fcd35e497092a67e4c9c5ce2031087f78e"
+    },
+    {
+      "_id": "6a9d0cfeb60102b67c42ca60",
+      "cropName": "Onion",
+      "state": "Uttar Pradesh",
+      "market": "Jayas APMC",
+      "priceDate": "2023-11-09",
+      "variety": "Red",
+      "hash": "0f68459286bded89302c53a07c0ceb0b9ce8683bb36bace8cffb320ca1336939"
+    },
+    {
+      "_id": "6a9d11e5b60102b67c452af1",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Sandila APMC",
+      "priceDate": "2021-12-14",
+      "variety": "Hybrid",
+      "hash": "240fc35cd5a580c720766029d09247ceefb4f6a27ab2ba6971fa83b765ece088"
+    },
+    {
+      "_id": "6a9d166bb60102b67c478b82",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Sitapur APMC",
+      "priceDate": "2025-01-25",
+      "variety": "Hybrid",
+      "hash": "1ace594b67fd66a96a35be15a58a467de75a682d6a47a4b1a3b3ae6fe5ab0afc"
+    },
+    {
+      "_id": "6a9d1aa0b60102b67c49ec13",
+      "cropName": "Potato",
+      "state": "Uttar Pradesh",
+      "market": "Auraiya APMC",
+      "priceDate": "2023-01-23",
+      "variety": "Desi",
+      "hash": "ef2c3e115189d706364ef69ea976b11ea604459449baf96d07376335f49fc7ef"
+    },
+    {
+      "_id": "6a9d204db60102b67c4c4ca4",
+      "cropName": "Potato",
+      "state": "Uttar Pradesh",
+      "market": "Mainpuri APMC",
+      "priceDate": "2025-10-25",
+      "variety": "Local",
+      "hash": "9e5363f9ea0c9e47c883c345375abf9b6e23620cf3c3f641cc20e9040f498c5d"
+    },
+    {
+      "_id": "6a9d2446b60102b67c4ead35",
+      "cropName": "Tomato",
+      "state": "Punjab",
+      "market": "Samana APMC",
+      "priceDate": "2025-04-23",
+      "variety": "Deshi",
+      "hash": "c120694954019364cd8bb7fd612b30e0881e88ddb47bec21fe03341a0df51cfe"
+    },
+    {
+      "_id": "6a9eaeeeb60102b67c510dc6",
+      "cropName": "Tomato",
+      "state": "West Bengal",
+      "market": "Moynaguri APMC",
+      "priceDate": "2025-09-22",
+      "variety": "Other",
+      "hash": "b6145fc5b9688d54dc07fbf52d93c7c940c8c594bcbb3c375afa6832938ad4bd"
+    },
+    {
+      "_id": "6a9eb21ab60102b67c536e57",
+      "cropName": "Potato",
+      "state": "Haryana",
+      "market": "Gohana APMC",
+      "priceDate": "2024-07-18",
+      "variety": "Other",
+      "hash": "ed8031a6a0be16b298991b8bf3fdfc92f35b481790da08ecbb7bf3e39716f0e6"
+    }
+  ],
+  "sampleHashes": [
+    "0f68459286bded89302c53a07c0ceb0b9ce8683bb36bace8cffb320ca1336939",
+    "1ace594b67fd66a96a35be15a58a467de75a682d6a47a4b1a3b3ae6fe5ab0afc",
+    "240fc35cd5a580c720766029d09247ceefb4f6a27ab2ba6971fa83b765ece088",
+    "2a42b8f9e63b7c29ddd635a67f16be842c0625db8899bc6c86b2cb7f5258c355",
+    "4f442886e15e338e591a0146481534fcd35e497092a67e4c9c5ce2031087f78e",
+    "9e5363f9ea0c9e47c883c345375abf9b6e23620cf3c3f641cc20e9040f498c5d",
+    "b6145fc5b9688d54dc07fbf52d93c7c940c8c594bcbb3c375afa6832938ad4bd",
+    "c120694954019364cd8bb7fd612b30e0881e88ddb47bec21fe03341a0df51cfe",
+    "ed8031a6a0be16b298991b8bf3fdfc92f35b481790da08ecbb7bf3e39716f0e6",
+    "ef2c3e115189d706364ef69ea976b11ea604459449baf96d07376335f49fc7ef"
+  ],
+  "aggregateHash": "832dbc578c2dadbb6edb16c6dd2a5f0daceecaebb6a717f059fac08c97180374"
+}

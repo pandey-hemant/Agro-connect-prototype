@@ -34,6 +34,7 @@
 'use strict';
 
 const MarketPrice = require('../../models/MarketPrice');
+const { callPythonPredict } = require('./pythonMlClient');
 
 const NUM = (v) => {
   if (v === null || v === undefined || v === '') return null;
@@ -208,6 +209,33 @@ async function predictPriceML({
       distinctDates: 0,
       minHistoryDates,
     });
+  }
+
+  // ML v2 — try the Python XGBoost service first. If it returns a
+  // valid envelope, forward it. The wire shape it returns already
+  // matches what the JS engine would have produced, so the rest of
+  // the app is unaffected. The service is best-effort: any failure
+  // (timeout, down, 5xx, shape mismatch) drops through to the JS
+  // engine so the user never sees a regression.
+  try {
+    const py = await callPythonPredict({
+      crop,
+      state: state || null,
+      market: market || null,
+      days,
+      minHistoryDates,
+    });
+    if (py && typeof py === 'object' && typeof py.available === 'boolean') {
+      // Fill in any JS-side fields the Python service doesn't carry
+      // (the existing JS callers rely on these existing as null/0
+      // and the React DecisionCard renders them defensively).
+      if (py.history_summary && !py.history_summary.last_avg) {
+        py.history_summary.last_avg = py.current_price;
+      }
+      return py;
+    }
+  } catch (_) {
+    // fall through to the JS engine
   }
 
   // PHASE 1 UPDATE: Prioritize AGMARKNET historical data for ML predictions

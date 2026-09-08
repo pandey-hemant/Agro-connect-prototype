@@ -132,6 +132,68 @@ async function hasAnyRowsForMonth(stateName, commodityName, year, month) {
   return n > 0;
 }
 
+/**
+ * Build an in-memory `Set` of composite keys for every (state,
+ * commodity, year, month) slice that already has at least one row in
+ * the MarketPrice collection. Replaces the old per-slice
+ * `countDocuments` round-trip — instead of 2,880 individual queries
+ * we issue ONE query that returns every already-populated slice in
+ * the requested window.
+ *
+ * The composite key format is the same one the per-slice loop
+ * already builds: `${state}|${commodity}|${yyyy-mm}`.
+ *
+ * Resumability / idempotency:
+ *   - Read-only — does not modify the collection.
+ *   - Pure optimisation of `--only-missing`; the partial unique
+ *     index is still the source of truth for dedup.
+ *   - Falls back to the legacy per-slice `countDocuments` if the
+ *     aggregation fails (e.g. an old collection without
+ *     `priceDate`).
+ */
+async function findExistingSlices(states, commodities, from, to) {
+  // Lower bound (inclusive) on priceDate — first day of `from`.
+  const startStr = `${ymStr(from.year, from.month)}-01`;
+  // Upper bound (inclusive) — last day of `to`.
+  const lastY = to.month === 12 ? to.year + 1 : to.year;
+  const lastM = to.month === 12 ? 1 : to.month;
+  const lastDay = new Date(lastY, lastM - 1, 0).getDate();
+  const endStr = `${ymStr(to.year, to.month)}-${String(lastDay).padStart(2, '0')}`;
+
+  // Aggregate every (state, cropName, year, month) tuple that has
+  // at least one row in the window. We use the `priceDate` string
+  // prefix (yyyy-mm-dd) — the first 7 chars give us yyyy-mm.
+  const pipeline = [
+    {
+      $match: {
+        source: 'agmarknet',
+        cropName: { $in: commodities },
+        state: { $in: states },
+        priceDate: { $gte: startStr, $lte: endStr, $type: 'string' },
+      },
+    },
+    {
+      $project: {
+        state: '$state',
+        cropName: '$cropName',
+        ym: { $substrBytes: ['$priceDate', 0, 7] },
+      },
+    },
+    { $group: { _id: { state: '$state', cropName: '$cropName', ym: '$ym' } } },
+  ];
+
+  const t0 = Date.now();
+  const groups = await MarketPrice.aggregate(pipeline).allowDiskUse(true);
+  const ms = Date.now() - t0;
+
+  const existing = new Set();
+  for (const g of groups) {
+    const k = `${g._id.state}|${g._id.cropName}|${g._id.ym}`;
+    existing.add(k);
+  }
+  return { existing, ms, groups: groups.length };
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const commodities = asList(args.commodities);
@@ -212,6 +274,40 @@ async function main() {
   const t0 = Date.now();
   let throttleMs = Number(process.env.AGMARKNET_THROTTLE_MS || 500);
 
+  // ---- Change 1: one-time aggregation of which (state, commodity,
+  // year, month) slices already have data. Replaces the per-slice
+  // hasAnyRowsForMonth / countDocuments round-trip. The Set is keyed
+  // by `${state}|${commodity}|${yyyy-mm}` — same shape as jobKey.
+  //
+  // Resumability contract: the partial unique index on
+  // (source, cropName, state, market, arrivalDate, variety) is still
+  // the source of truth for dedup; this Set is purely a "skip the
+  // fetch+upsert for a month we already populated" fast path.
+  let existingSlices = new Set();
+  let existingSlicesSource = 'disabled';
+  let existingSlicesMs = 0;
+  let existingSlicesGroups = 0;
+  if (onlyMissing && !dryRun && !diagnose) {
+    console.log(`[backfill] pre-loading existing-slice index (one-time aggregation)…`);
+    try {
+      const r = await findExistingSlices(states, commodities, from, to);
+      existingSlices = r.existing;
+      existingSlicesMs = r.ms;
+      existingSlicesGroups = r.groups;
+      existingSlicesSource = 'aggregation';
+      console.log(
+        `[backfill] existing-slice index: ${existingSlices.size} slices present ` +
+        `(groups=${existingSlicesGroups}, aggMs=${existingSlicesMs})`
+      );
+    } catch (err) {
+      console.warn(
+        `[backfill] WARNING: existing-slice aggregation failed (${err.message}); ` +
+        `falling back to per-slice hasAnyRowsForMonth().`
+      );
+      existingSlicesSource = 'fallback_per_slice';
+    }
+  }
+
   // Outer loop: states, then commodities, then months. Iterate so
   // that the throttle is naturally distributed.
   for (const sName of states) {
@@ -241,12 +337,29 @@ async function main() {
           updated: 0,
           skipped: 0,
           flagged: 0,
+          // Phase C instrumentation — wall-clock breakdown.
+          httpMs: 0,
+          mongoMs: 0,
+          httpRetries: 0,
+          httpAttempts: 0,
           durationMs: 0,
           error: null,
         };
         try {
           if (onlyMissing && !dryRun) {
-            const has = await hasAnyRowsForMonth(sName, cName, year, month);
+            // Fast path: O(1) Set lookup. The Set was built once
+            // at startup by findExistingSlices(). Falls back to
+            // per-slice countDocuments if the aggregation failed
+            // (existingSlicesSource === 'fallback_per_slice').
+            let has;
+            const tLookup = Date.now();
+            if (existingSlicesSource === 'aggregation') {
+              has = existingSlices.has(jobKey);
+              entry.mongoMs += Date.now() - tLookup;
+            } else {
+              has = await hasAnyRowsForMonth(sName, cName, year, month);
+              entry.mongoMs += Date.now() - tLookup;
+            }
             if (has) {
               entry.status = 'skipped_existing';
               perJob.push(entry);
@@ -256,6 +369,7 @@ async function main() {
             }
           }
           // Fetch.
+          const tFetch = Date.now();
           const r = await provider.fetchDateWise({
             year,
             month,
@@ -263,6 +377,16 @@ async function main() {
             commodityId: cMatch.id,
             includeExcel: false,
           });
+          entry.httpMs += Date.now() - tFetch;
+          // The provider caps retries at 2; we don't get per-attempt
+          // counts from it today, but at minimum we know "1 attempt"
+          // when r.ok and ">=2 attempts" when we see the same fetch
+          // reach us after a backoff. We surface httpAttempts as
+          // 1 on success/fast-fail and 0 if the call didn't return.
+          entry.httpAttempts = Math.max(entry.httpAttempts, 1);
+          // Best-effort retry counter: if the fetch failed, the
+          // provider already burned its retries; count them.
+          if (!r.ok && r.status === 0) entry.httpRetries += 1;
           if (!r.ok) {
             entry.status = 'fetch_failed';
             entry.error = r.error || `status ${r.status}`;
@@ -367,11 +491,13 @@ async function main() {
             continue;
           }
           // Persist.
+          const tPersist = Date.now();
           const u = await normalizeAndUpsert({
             stateName: sName,
             commodityName: cName,
             records: r.records,
           });
+          entry.mongoMs += Date.now() - tPersist;
           entry.inserted = u.inserted;
           entry.updated = u.updated;
           entry.skipped = u.skipped;
@@ -382,7 +508,7 @@ async function main() {
           perJob.push(entry);
           jobsOk += 1;
           console.log(
-            `[${jobsDone}/${totalJobs}] ${jobKey}  OK         recs=${entry.records} ins=${entry.inserted} upd=${entry.updated} skip=${entry.skipped} flag=${entry.flagged}` +
+            `[${jobsDone}/${totalJobs}] ${jobKey}  OK         recs=${entry.records} ins=${entry.inserted} upd=${entry.updated} skip=${entry.skipped} flag=${entry.flagged} httpMs=${entry.httpMs} mongoMs=${entry.mongoMs} durMs=${entry.durationMs}` +
             (Object.keys(entry.softFlagCount).length
               ? `  soft=${JSON.stringify(entry.softFlagCount)}`
               : '') +
@@ -432,6 +558,14 @@ async function main() {
     mongodb_mode: conn ? conn.mode : 'dry-run',
     mongodb_uri_host: conn && conn.uri ? (() => { try { return new URL(conn.uri).host; } catch { return 'n/a'; } })() : 'n/a',
     durationMs: totalDurationMs,
+    // Phase C instrumentation: HTTP and Mongo wall time across all jobs.
+    total_http_ms: perJob.reduce((a, j) => a + (j.httpMs || 0), 0),
+    total_mongo_ms: perJob.reduce((a, j) => a + (j.mongoMs || 0), 0),
+    // Change 1: existing-slice index summary.
+    existing_slices_source: existingSlicesSource,
+    existing_slices_count: existingSlices.size,
+    existing_slices_agg_ms: existingSlicesMs,
+    existing_slices_groups: existingSlicesGroups,
     dryRun,
     onlyMissing,
     diagnose,
@@ -447,7 +581,11 @@ async function main() {
   console.log(`[backfill] soft:   ${JSON.stringify(softFlagTotals)}`);
   console.log(`[backfill] hard:   ${JSON.stringify(hardFlagTotals)}`);
   console.log(`[backfill] mongo:  mode=${totals.mongodb_mode} host=${totals.mongodb_uri_host}`);
-  console.log(`[backfill] time:   ${(totalDurationMs / 1000).toFixed(1)}s`);
+  console.log(`[backfill] time:   ${(totalDurationMs / 1000).toFixed(1)}s wall, httpMs=${totals.total_http_ms}, mongoMs=${totals.total_mongo_ms}`);
+  console.log(
+    `[backfill] existing-slices: source=${existingSlicesSource} count=${existingSlices.size} ` +
+    `aggMs=${existingSlicesMs} groups=${existingSlicesGroups}`
+  );
 
   if (reportPath) {
     try {

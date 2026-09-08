@@ -1,0 +1,677 @@
+{
+  "timestamp": "2026-09-05T12:29:18.045Z",
+  "statesTested": 18,
+  "selectedStates": [
+    "Assam",
+    "Bihar",
+    "Gujarat",
+    "Haryana",
+    "Karnataka",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Uttar Pradesh",
+    "West Bengal",
+    "Telangana",
+    "Himachal Pradesh",
+    "Tamil Nadu",
+    "Uttarakhand",
+    "Andhra Pradesh",
+    "Jharkhand"
+  ],
+  "fullResults": [
+    {
+      "state": "Assam",
+      "stateId": "4",
+      "ok": true,
+      "totalRecords": 5690,
+      "marketCount": 72,
+      "monthsWithData": 53,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 241,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 355,
+          "monthsWithData": 12,
+          "maxMarkets": 18
+        },
+        "Tomato": {
+          "totalRecords": 4760,
+          "monthsWithData": 23,
+          "maxMarkets": 54
+        },
+        "Potato": {
+          "totalRecords": 575,
+          "monthsWithData": 18,
+          "maxMarkets": 19
+        }
+      },
+      "region": "Northeast",
+      "score": 100
+    },
+    {
+      "state": "Bihar",
+      "stateId": "5",
+      "ok": true,
+      "totalRecords": 58388,
+      "marketCount": 96,
+      "monthsWithData": 120,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 2860,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 23446,
+          "monthsWithData": 50,
+          "maxMarkets": 80
+        },
+        "Tomato": {
+          "totalRecords": 10988,
+          "monthsWithData": 20,
+          "maxMarkets": 68
+        },
+        "Potato": {
+          "totalRecords": 23954,
+          "monthsWithData": 50,
+          "maxMarkets": 79
+        }
+      },
+      "region": "East",
+      "score": 100
+    },
+    {
+      "state": "Gujarat",
+      "stateId": "11",
+      "ok": true,
+      "totalRecords": 84350,
+      "marketCount": 53,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 3070,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 28548,
+          "monthsWithData": 60,
+          "maxMarkets": 29
+        },
+        "Tomato": {
+          "totalRecords": 29812,
+          "monthsWithData": 60,
+          "maxMarkets": 30
+        },
+        "Potato": {
+          "totalRecords": 25990,
+          "monthsWithData": 60,
+          "maxMarkets": 26
+        }
+      },
+      "region": "West",
+      "score": 100
+    },
+    {
+      "state": "Haryana",
+      "stateId": "12",
+      "ok": true,
+      "totalRecords": 219298,
+      "marketCount": 90,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 10402,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 70656,
+          "monthsWithData": 60,
+          "maxMarkets": 77
+        },
+        "Tomato": {
+          "totalRecords": 72099,
+          "monthsWithData": 60,
+          "maxMarkets": 78
+        },
+        "Potato": {
+          "totalRecords": 76543,
+          "monthsWithData": 60,
+          "maxMarkets": 79
+        }
+      },
+      "region": "North",
+      "score": 100
+    },
+    {
+      "state": "Karnataka",
+      "stateId": "16",
+      "ok": true,
+      "totalRecords": 62891,
+      "marketCount": 65,
+      "monthsWithData": 169,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 2535,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 16344,
+          "monthsWithData": 49,
+          "maxMarkets": 36
+        },
+        "Tomato": {
+          "totalRecords": 31028,
+          "monthsWithData": 60,
+          "maxMarkets": 39
+        },
+        "Potato": {
+          "totalRecords": 15519,
+          "monthsWithData": 60,
+          "maxMarkets": 29
+        }
+      },
+      "region": "South",
+      "score": 100
+    },
+    {
+      "state": "Madhya Pradesh",
+      "stateId": "19",
+      "ok": true,
+      "totalRecords": 134992,
+      "marketCount": 167,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 8722,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 57780,
+          "monthsWithData": 60,
+          "maxMarkets": 78
+        },
+        "Tomato": {
+          "totalRecords": 39299,
+          "monthsWithData": 60,
+          "maxMarkets": 52
+        },
+        "Potato": {
+          "totalRecords": 37913,
+          "monthsWithData": 60,
+          "maxMarkets": 52
+        }
+      },
+      "region": "Central",
+      "score": 100
+    },
+    {
+      "state": "Maharashtra",
+      "stateId": "20",
+      "ok": true,
+      "totalRecords": 162946,
+      "marketCount": 128,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 9218,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 77815,
+          "monthsWithData": 60,
+          "maxMarkets": 94
+        },
+        "Tomato": {
+          "totalRecords": 52146,
+          "monthsWithData": 60,
+          "maxMarkets": 52
+        },
+        "Potato": {
+          "totalRecords": 32985,
+          "monthsWithData": 60,
+          "maxMarkets": 39
+        }
+      },
+      "region": "West",
+      "score": 100
+    },
+    {
+      "state": "Odisha",
+      "stateId": "26",
+      "ok": true,
+      "totalRecords": 135049,
+      "marketCount": 87,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 6298,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 36432,
+          "monthsWithData": 60,
+          "maxMarkets": 47
+        },
+        "Tomato": {
+          "totalRecords": 53648,
+          "monthsWithData": 60,
+          "maxMarkets": 68
+        },
+        "Potato": {
+          "totalRecords": 44969,
+          "monthsWithData": 60,
+          "maxMarkets": 54
+        }
+      },
+      "region": "East",
+      "score": 100
+    },
+    {
+      "state": "Punjab",
+      "stateId": "28",
+      "ok": true,
+      "totalRecords": 246927,
+      "marketCount": 123,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 13693,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 79699,
+          "monthsWithData": 60,
+          "maxMarkets": 88
+        },
+        "Tomato": {
+          "totalRecords": 78730,
+          "monthsWithData": 60,
+          "maxMarkets": 97
+        },
+        "Potato": {
+          "totalRecords": 88498,
+          "monthsWithData": 60,
+          "maxMarkets": 105
+        }
+      },
+      "region": "North",
+      "score": 100
+    },
+    {
+      "state": "Rajasthan",
+      "stateId": "29",
+      "ok": true,
+      "totalRecords": 117730,
+      "marketCount": 62,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 4635,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 40026,
+          "monthsWithData": 60,
+          "maxMarkets": 43
+        },
+        "Tomato": {
+          "totalRecords": 38884,
+          "monthsWithData": 60,
+          "maxMarkets": 38
+        },
+        "Potato": {
+          "totalRecords": 38820,
+          "monthsWithData": 60,
+          "maxMarkets": 40
+        }
+      },
+      "region": "West",
+      "score": 100
+    },
+    {
+      "state": "Uttar Pradesh",
+      "stateId": "34",
+      "ok": true,
+      "totalRecords": 795353,
+      "marketCount": 226,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 59784,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 259205,
+          "monthsWithData": 60,
+          "maxMarkets": 202
+        },
+        "Tomato": {
+          "totalRecords": 254978,
+          "monthsWithData": 60,
+          "maxMarkets": 200
+        },
+        "Potato": {
+          "totalRecords": 281170,
+          "monthsWithData": 60,
+          "maxMarkets": 209
+        }
+      },
+      "region": "Central",
+      "score": 100
+    },
+    {
+      "state": "West Bengal",
+      "stateId": "36",
+      "ok": true,
+      "totalRecords": 246224,
+      "marketCount": 74,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 10590,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 80434,
+          "monthsWithData": 60,
+          "maxMarkets": 55
+        },
+        "Tomato": {
+          "totalRecords": 55572,
+          "monthsWithData": 60,
+          "maxMarkets": 44
+        },
+        "Potato": {
+          "totalRecords": 110218,
+          "monthsWithData": 60,
+          "maxMarkets": 70
+        }
+      },
+      "region": "East",
+      "score": 100
+    },
+    {
+      "state": "Telangana",
+      "stateId": "32",
+      "ok": true,
+      "totalRecords": 47658,
+      "marketCount": 40,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 1507,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 11947,
+          "monthsWithData": 60,
+          "maxMarkets": 15
+        },
+        "Tomato": {
+          "totalRecords": 21959,
+          "monthsWithData": 60,
+          "maxMarkets": 28
+        },
+        "Potato": {
+          "totalRecords": 13752,
+          "monthsWithData": 60,
+          "maxMarkets": 18
+        }
+      },
+      "region": "South",
+      "score": 95
+    },
+    {
+      "state": "Himachal Pradesh",
+      "stateId": "13",
+      "ok": true,
+      "totalRecords": 71829,
+      "marketCount": 37,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 2185,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 23564,
+          "monthsWithData": 60,
+          "maxMarkets": 29
+        },
+        "Tomato": {
+          "totalRecords": 24299,
+          "monthsWithData": 60,
+          "maxMarkets": 31
+        },
+        "Potato": {
+          "totalRecords": 23966,
+          "monthsWithData": 60,
+          "maxMarkets": 30
+        }
+      },
+      "region": "North",
+      "score": 94
+    },
+    {
+      "state": "Tamil Nadu",
+      "stateId": "31",
+      "ok": true,
+      "totalRecords": 227201,
+      "marketCount": 255,
+      "monthsWithData": 70,
+      "yearsWithData": [
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 3,
+      "densityScore": 10884,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 85213,
+          "monthsWithData": 27,
+          "maxMarkets": 243
+        },
+        "Tomato": {
+          "totalRecords": 76871,
+          "monthsWithData": 24,
+          "maxMarkets": 247
+        },
+        "Potato": {
+          "totalRecords": 65117,
+          "monthsWithData": 19,
+          "maxMarkets": 221
+        }
+      },
+      "region": "South",
+      "score": 92
+    },
+    {
+      "state": "Uttarakhand",
+      "stateId": "35",
+      "ok": true,
+      "totalRecords": 50839,
+      "marketCount": 21,
+      "monthsWithData": 180,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 1165,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 14909,
+          "monthsWithData": 60,
+          "maxMarkets": 18
+        },
+        "Tomato": {
+          "totalRecords": 17947,
+          "monthsWithData": 60,
+          "maxMarkets": 19
+        },
+        "Potato": {
+          "totalRecords": 17983,
+          "monthsWithData": 60,
+          "maxMarkets": 19
+        }
+      },
+      "region": "North",
+      "score": 86
+    },
+    {
+      "state": "Andhra Pradesh",
+      "stateId": "2",
+      "ok": true,
+      "totalRecords": 7772,
+      "marketCount": 11,
+      "monthsWithData": 136,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "yearSpan": 5,
+      "densityScore": 129,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 1975,
+          "monthsWithData": 59,
+          "maxMarkets": 2
+        },
+        "Tomato": {
+          "totalRecords": 5155,
+          "monthsWithData": 44,
+          "maxMarkets": 9
+        },
+        "Potato": {
+          "totalRecords": 642,
+          "monthsWithData": 33,
+          "maxMarkets": 1
+        }
+      },
+      "region": "South",
+      "score": 81
+    },
+    {
+      "state": "Jharkhand",
+      "stateId": "15",
+      "ok": true,
+      "totalRecords": 488,
+      "marketCount": 2,
+      "monthsWithData": 35,
+      "yearsWithData": [
+        2021,
+        2022,
+        2023
+      ],
+      "yearSpan": 3,
+      "densityScore": 2,
+      "byCrop": {
+        "Onion": {
+          "totalRecords": 134,
+          "monthsWithData": 8,
+          "maxMarkets": 2
+        },
+        "Tomato": {
+          "totalRecords": 203,
+          "monthsWithData": 16,
+          "maxMarkets": 2
+        },
+        "Potato": {
+          "totalRecords": 151,
+          "monthsWithData": 11,
+          "maxMarkets": 2
+        }
+      },
+      "region": "East",
+      "score": 32
+    }
+  ],
+  "estimates": {
+    "apiCalls": 3240,
+    "estimatedRecords": 2675625,
+    "estimatedMB": 638,
+    "estimatedHours": 0.5,
+    "throttleMs": 500
+  }
+}

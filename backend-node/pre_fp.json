@@ -1,0 +1,110 @@
+{
+  "capturedAt": "2026-09-07T09:19:08.476Z",
+  "total": 1004458,
+  "sampled": 10,
+  "hashes": [
+    {
+      "_id": "6a965860b60102b67c4069a9",
+      "cropName": "Onion",
+      "state": "Maharashtra",
+      "market": "AGRICULTURE PRODUCE MARKET COMITEE CHANDWAD",
+      "priceDate": "2023-01-02",
+      "variety": "Red",
+      "hash": "2a42b8f9e63b7c29ddd635a67f16be842c0625db8899bc6c86b2cb7f5258c355"
+    },
+    {
+      "_id": "6a9d9cd7b60102b67c4fbd78",
+      "cropName": "Onion",
+      "state": "Tamil Nadu",
+      "market": "Vellore APMC",
+      "priceDate": "06/09/2026",
+      "variety": "Bellary",
+      "hash": "7aa3db25f7f3b9b461c05367ac91e4a59c28c0017b165494f23ede85dbb32888"
+    },
+    {
+      "_id": "6a9d0b73b60102b67c41f22c",
+      "cropName": "Onion",
+      "state": "Uttar Pradesh",
+      "market": "Mainpuri APMC",
+      "priceDate": "2022-10-18",
+      "variety": "Red",
+      "hash": "06bbb78bebf837894d90ee3c5b3d4916c8feecbe41f6dd4f92be67c1ee041e10"
+    },
+    {
+      "_id": "6a9d0e82b60102b67c437a89",
+      "cropName": "Onion",
+      "state": "Uttar Pradesh",
+      "market": "Shahganj APMC",
+      "priceDate": "2024-09-12",
+      "variety": "Red",
+      "hash": "68407cd2381bcd3008a3c68682078fb8ceeceb2f180d21d50430d182f2cbd29f"
+    },
+    {
+      "_id": "6a9d11bab60102b67c4502e6",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Hardoi APMC",
+      "priceDate": "2021-10-29",
+      "variety": "Hybrid",
+      "hash": "b864577d6634ae75e19687051a8b3e14d5a6dcb7023eed5da73292052ef59f3c"
+    },
+    {
+      "_id": "6a9d1430b60102b67c468b43",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Khekda APMC",
+      "priceDate": "2023-10-19",
+      "variety": "Deshi",
+      "hash": "5df4f80bafa70f72138267a4ed088bec1b864386d85576c04c6b14dacbc10ff7"
+    },
+    {
+      "_id": "6a9d181bb60102b67c4813a0",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Agra APMC",
+      "priceDate": "2025-10-16",
+      "variety": "Hybrid",
+      "hash": "1bbbd54e087268ad5f8ecb9536603f47a5df9e5e6885eeea244d20dc09e0c75a"
+    },
+    {
+      "_id": "6a9d1a16b60102b67c499bfd",
+      "cropName": "Potato",
+      "state": "Uttar Pradesh",
+      "market": "Purwa APMC",
+      "priceDate": "2022-08-08",
+      "variety": "Desi",
+      "hash": "0c87d749945ab62f5559becc0a0fda37efdaf89ccae6dd7a6b9677f102943a3f"
+    },
+    {
+      "_id": "6a9d1d1bb60102b67c4b245a",
+      "cropName": "Potato",
+      "state": "Uttar Pradesh",
+      "market": "Chitwadagaon APMC",
+      "priceDate": "2024-06-26",
+      "variety": "Badshah",
+      "hash": "5bad101b2a916cdf08fcbf0ff16ba994fa9946cb287c42df174d11e22a0361ea"
+    },
+    {
+      "_id": "6a9d20ebb60102b67c4cacb7",
+      "cropName": "Onion",
+      "state": "Punjab",
+      "market": "Dasuya APMC",
+      "priceDate": "2021-12-03",
+      "variety": "Other",
+      "hash": "7dfb90287c47bff5b131ba4a33a4b23b5940ce682417078175704d3eb4c504be"
+    }
+  ],
+  "sampleHashes": [
+    "06bbb78bebf837894d90ee3c5b3d4916c8feecbe41f6dd4f92be67c1ee041e10",
+    "0c87d749945ab62f5559becc0a0fda37efdaf89ccae6dd7a6b9677f102943a3f",
+    "1bbbd54e087268ad5f8ecb9536603f47a5df9e5e6885eeea244d20dc09e0c75a",
+    "2a42b8f9e63b7c29ddd635a67f16be842c0625db8899bc6c86b2cb7f5258c355",
+    "5bad101b2a916cdf08fcbf0ff16ba994fa9946cb287c42df174d11e22a0361ea",
+    "5df4f80bafa70f72138267a4ed088bec1b864386d85576c04c6b14dacbc10ff7",
+    "68407cd2381bcd3008a3c68682078fb8ceeceb2f180d21d50430d182f2cbd29f",
+    "7aa3db25f7f3b9b461c05367ac91e4a59c28c0017b165494f23ede85dbb32888",
+    "7dfb90287c47bff5b131ba4a33a4b23b5940ce682417078175704d3eb4c504be",
+    "b864577d6634ae75e19687051a8b3e14d5a6dcb7023eed5da73292052ef59f3c"
+  ],
+  "aggregateHash": "db62cb12177392d8553c7d7a9c3007a7fdcf826e3bf44e25fee0c63151d83089"
+}

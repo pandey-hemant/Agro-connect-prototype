@@ -96,35 +96,45 @@ function rawToDoc(raw, ctx) {
   const maxP = isFiniteNonNeg(raw.maxPricePerQuintal) ? raw.maxPricePerQuintal : null;
   const arrivals = isFiniteNonNeg(raw.arrivals) ? raw.arrivals : null;
   const safeModal = isFiniteNonNeg(modal) ? modal : null;
-  return {
-    doc: {
-      source: 'agmarknet',
-      cropName,
-      state,
-      market,
-      district: (raw.marketDistrict || '').trim(),
-      pricePerQuintal: safeModal,
-      pricePerKg: safeModal == null ? null : Math.round(safeModal * PER_KG_FROM_QUINTAL * 100) / 100,
-      minPricePerKg: minP == null ? null : Math.round(minP * PER_KG_FROM_QUINTAL * 100) / 100,
-      maxPricePerKg: maxP == null ? null : Math.round(maxP * PER_KG_FROM_QUINTAL * 100) / 100,
-      unit: 'INR/quintal',
-      price_unit: raw.priceUnit || 'Rs./Quintal',
-      arrivalDate,
-      priceDate: arrivalDate,
-      variety,
-      grade: (raw.grade || '').trim(),
-      arrivals,
-      isLive: false, // historical, not "live"
-      _softFlag: softFlag, // internal; stripped before persisting
-      raw: raw.raw || null,
-      // Preserve total_arrivals (the day-total) from the outer
-      // record when present, alongside the per-variety `arrivals`.
-      totalArrivals: isFiniteNonNeg(raw.totalArrivals) ? raw.totalArrivals : null,
-      // Preserve the outer upstream record (containing arrivalDate
-      // and total_arrivals) alongside the per-variety `raw`.
-      rawOuter: raw.rawOuter || null,
-    },
+  // Build the doc. `source` is hardcoded 'agmarknet' for everything
+  // that flows through this orchestrator today, but we leave the
+  // door open for a future caller to override it.
+  const docSource = 'agmarknet';
+  const doc = {
+    source: docSource,
+    cropName,
+    state,
+    market,
+    district: (raw.marketDistrict || '').trim(),
+    pricePerQuintal: safeModal,
+    pricePerKg: safeModal == null ? null : Math.round(safeModal * PER_KG_FROM_QUINTAL * 100) / 100,
+    minPricePerKg: minP == null ? null : Math.round(minP * PER_KG_FROM_QUINTAL * 100) / 100,
+    maxPricePerKg: maxP == null ? null : Math.round(maxP * PER_KG_FROM_QUINTAL * 100) / 100,
+    unit: 'INR/quintal',
+    price_unit: raw.priceUnit || 'Rs./Quintal',
+    arrivalDate,
+    priceDate: arrivalDate,
+    variety,
+    grade: (raw.grade || '').trim(),
+    arrivals,
+    isLive: false, // historical, not "live"
+    // Preserve total_arrivals (the day-total) from the outer
+    // record when present, alongside the per-variety `arrivals`.
+    totalArrivals: isFiniteNonNeg(raw.totalArrivals) ? raw.totalArrivals : null,
+    _softFlag: softFlag, // internal; stripped before persisting
   };
+
+  // Change 2: for NEW historical agmarknet records, omit the upstream
+  // `raw` and `rawOuter` blobs to keep Mongo document size down. The
+  // schema still has both fields (default null), so existing rows
+  // are unaffected and a future migration can backfill the values
+  // if ML ever needs them. Other sources are unchanged.
+  if (docSource !== 'agmarknet') {
+    doc.raw = raw.raw || null;
+    doc.rawOuter = raw.rawOuter || null;
+  }
+
+  return { doc };
 }
 
 /**

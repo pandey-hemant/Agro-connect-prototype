@@ -1,0 +1,110 @@
+{
+  "capturedAt": "2026-09-07T09:19:59.372Z",
+  "total": 1011838,
+  "sampled": 10,
+  "hashes": [
+    {
+      "_id": "6a965860b60102b67c4069a9",
+      "cropName": "Onion",
+      "state": "Maharashtra",
+      "market": "AGRICULTURE PRODUCE MARKET COMITEE CHANDWAD",
+      "priceDate": "2023-01-02",
+      "variety": "Red",
+      "hash": "2a42b8f9e63b7c29ddd635a67f16be842c0625db8899bc6c86b2cb7f5258c355"
+    },
+    {
+      "_id": "6a9e81b5b60102b67c4fda4c",
+      "cropName": "Onion",
+      "state": "Maharashtra",
+      "market": "Shri Rameshwar Krushi Market, M.Nagar, Tal Deola, Dist Nashik",
+      "priceDate": "2024-12-31",
+      "variety": "Red",
+      "hash": "fbb8c7ca8301de3920690650fac9a1787e97a251ed213f3ce6ffb46f5e662304"
+    },
+    {
+      "_id": "6a9d0b76b60102b67c41f50e",
+      "cropName": "Onion",
+      "state": "Uttar Pradesh",
+      "market": "Purwa APMC",
+      "priceDate": "2022-10-20",
+      "variety": "Red",
+      "hash": "200e82102ab28fdc65c312f2fb6fff7abb846de5d72a150f331501c2c3d02d68"
+    },
+    {
+      "_id": "6a9d0e96b60102b67c43804d",
+      "cropName": "Onion",
+      "state": "Uttar Pradesh",
+      "market": "Charra APMC",
+      "priceDate": "2024-10-05",
+      "variety": "Red",
+      "hash": "157b9419252cabfffc13fab545e7d121d76d6aabda7d92ab830374e34b559560"
+    },
+    {
+      "_id": "6a9d11bfb60102b67c450b8c",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Tamkuhi road APMC",
+      "priceDate": "2021-10-22",
+      "variety": "Tomato",
+      "hash": "56d8cdd2b238c5965600a775551fe948135ac87ccc3473bcb379f140681eee35"
+    },
+    {
+      "_id": "6a9d1449b60102b67c4696cb",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "CHHUTMALPUR APMC",
+      "priceDate": "2023-11-14",
+      "variety": "Hybrid",
+      "hash": "e48988210aac0e88251a06ed6f26d99a41817c96adeb4d0028bd930415b56855"
+    },
+    {
+      "_id": "6a9d1840b60102b67c48220a",
+      "cropName": "Tomato",
+      "state": "Uttar Pradesh",
+      "market": "Tamkuhi road APMC",
+      "priceDate": "2025-10-18",
+      "variety": "Tomato",
+      "hash": "a822f2e846bc1210b06001d7cff94f3553115a6095981394284280322296d265"
+    },
+    {
+      "_id": "6a9d1a32b60102b67c49ad49",
+      "cropName": "Potato",
+      "state": "Uttar Pradesh",
+      "market": "Muskara APMC",
+      "priceDate": "2022-09-12",
+      "variety": "Desi",
+      "hash": "9132c6325951f113b40e30d9f3b5731f2361b3812669ac55398e5f758bc9091c"
+    },
+    {
+      "_id": "6a9d1d4ab60102b67c4b3888",
+      "cropName": "Potato",
+      "state": "Uttar Pradesh",
+      "market": "Gangoh APMC",
+      "priceDate": "2024-07-29",
+      "variety": "Desi",
+      "hash": "0b870c5663c88e0ba7b2ca8c97cb5cc912ae1a46115869909b4dcf0a741489b6"
+    },
+    {
+      "_id": "6a9d2104b60102b67c4cc3c7",
+      "cropName": "Onion",
+      "state": "Punjab",
+      "market": "Noor Mehal APMC",
+      "priceDate": "2022-04-05",
+      "variety": "1st Sort",
+      "hash": "44e17be97c61276349717630d931130903e6cf6dad2ba6187ebc942aa0f91d5c"
+    }
+  ],
+  "sampleHashes": [
+    "0b870c5663c88e0ba7b2ca8c97cb5cc912ae1a46115869909b4dcf0a741489b6",
+    "157b9419252cabfffc13fab545e7d121d76d6aabda7d92ab830374e34b559560",
+    "200e82102ab28fdc65c312f2fb6fff7abb846de5d72a150f331501c2c3d02d68",
+    "2a42b8f9e63b7c29ddd635a67f16be842c0625db8899bc6c86b2cb7f5258c355",
+    "44e17be97c61276349717630d931130903e6cf6dad2ba6187ebc942aa0f91d5c",
+    "56d8cdd2b238c5965600a775551fe948135ac87ccc3473bcb379f140681eee35",
+    "9132c6325951f113b40e30d9f3b5731f2361b3812669ac55398e5f758bc9091c",
+    "a822f2e846bc1210b06001d7cff94f3553115a6095981394284280322296d265",
+    "e48988210aac0e88251a06ed6f26d99a41817c96adeb4d0028bd930415b56855",
+    "fbb8c7ca8301de3920690650fac9a1787e97a251ed213f3ce6ffb46f5e662304"
+  ],
+  "aggregateHash": "df8d42883c84b43f1d9e4c08da3ac3091d462a9b8b55c3d714af261d2c42e732"
+}
