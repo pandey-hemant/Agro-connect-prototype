@@ -105,6 +105,7 @@ MarketPriceSchema.index(
 // Common historical queries.
 MarketPriceSchema.index({ cropName: 1, priceDate: 1 });
 MarketPriceSchema.index({ cropName: 1, state: 1, market: 1, priceDate: 1 });
+MarketPriceSchema.index({ cropName: 1, state: 1, priceDate: 1 });
 MarketPriceSchema.index({ source: 1, cropName: 1, priceDate: 1 });
 
 MarketPriceSchema.methods.toRead = function () {
