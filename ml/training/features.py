@@ -50,7 +50,7 @@ Public functions:
 from __future__ import annotations
 
 import math
-from typing import Iterable, List, Sequence, Tuple
+from typing import Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
@@ -141,15 +141,20 @@ def _row_features(
     values: Sequence[float],
     dates: Sequence[pd.Timestamp],
     target_idx: int,
+    target_date: Optional[pd.Timestamp] = None,
 ) -> List[float]:
     """Compute the feature vector for the row whose TARGET is
     `values[target_idx]`. The features look ONLY at indices
     `0..target_idx-1`. This is the no-leakage invariant.
+
+    For inference, `target_date` should be provided explicitly (the date
+    of the prediction target, i.e., tomorrow). For training, it defaults
+    to `dates[target_idx]`.
     """
     if target_idx <= 0:
         return [np.nan] * len(FEATURE_NAMES)
 
-    cur_date = dates[target_idx]
+    cur_date = target_date if target_date is not None else dates[target_idx]
     # We want features as of (target_idx - 1) — i.e. what we'd have
     # known the day BEFORE we want to predict. lag_1 = value[-1].
     last_known = target_idx - 1
@@ -318,8 +323,13 @@ def same_features(series: pd.DataFrame) -> List[float]:
     s = series.sort_values("date").reset_index(drop=True)
     values: List[float] = [float(v) for v in s["value"].tolist()]
     dates: List[pd.Timestamp] = [pd.Timestamp(d) for d in s["date"].tolist()]
-    # target_idx is "tomorrow", so we ask for features at index=len.
-    feats = _row_features(values, dates, len(values))
+
+# The prediction target is the next day after the last observed date.
+# Add only the future DATE; do not add a future price/value.
+    next_date = dates[-1] + pd.Timedelta(days=1)
+    inference_dates = dates + [next_date]
+
+    feats = _row_features(values, inference_dates, len(values))
     if any(math.isnan(f) for f in feats):
         raise ValueError("insufficient history for same_features")
     return feats

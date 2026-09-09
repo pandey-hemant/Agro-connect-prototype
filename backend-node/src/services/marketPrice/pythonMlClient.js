@@ -9,10 +9,11 @@
  * engine would have produced — or null on any failure.
  *
  * Failure modes (each one returns null so the caller falls back
- * to the JS engine; the user never sees a regression):
+ * to the JS engine; the user never sees a regression). Enable
+ * ML_SERVICE_DEBUG=1 to log safe request diagnostics:
  *   - ML_SERVICE_URL is unset
  *   - service is down / refused
- *   - request times out (default 2.5s)
+ *   - request times out (default 10s)
  *   - service returns a non-200 status
  *   - service returns an unexpected shape
  *
@@ -25,7 +26,7 @@ const http = require('http');
 const https = require('https');
 const { URL } = require('url');
 
-const DEFAULT_TIMEOUT_MS = 2500;
+const DEFAULT_TIMEOUT_MS = 10000;
 const MAX_DAYS = 30;
 const MIN_HISTORY_FLOOR = 2;
 const MIN_HISTORY_CEIL = 60;
@@ -33,6 +34,12 @@ const MIN_HISTORY_CEIL = 60;
 function _readEnv() {
   const raw = process.env.ML_SERVICE_URL || '';
   return raw.trim();
+}
+
+function _debug(message, details = null) {
+  if (process.env.ML_SERVICE_DEBUG !== '1') return;
+  const suffix = details ? ` ${JSON.stringify(details)}` : '';
+  console.info(`[ml-python] ${message}${suffix}`);
 }
 
 function _clamp(v, lo, hi, fallback) {
@@ -95,19 +102,26 @@ function _post(urlObj, body, timeoutMs) {
  * @param {string|null} [params.market]  optional
  * @param {number} [params.days=7]       1..30
  * @param {number} [params.minHistoryDates=10]  2..60
- * @param {number} [params.timeoutMs=2500]      request timeout
+ * @param {number} [params.timeoutMs=10000]     request timeout
  * @returns {Promise<Object|null>}  the prediction envelope, or null on failure
  */
 async function callPythonPredict(params = {}) {
   const base = _readEnv();
-  if (!base) return null;
+  if (!base) {
+    _debug('predict skipped: ML_SERVICE_URL is unset');
+    return null;
+  }
   const { crop, state = null, market = null } = params;
-  if (!crop) return null;
+  if (!crop) {
+    _debug('predict skipped: crop is required');
+    return null;
+  }
 
   const urlObj = (() => {
     try {
       return new URL('/predict', base);
-    } catch (_) {
+    } catch (err) {
+      _debug('predict skipped: invalid ML_SERVICE_URL', { error: err.message });
       return null;
     }
   })();
@@ -130,12 +144,31 @@ async function callPythonPredict(params = {}) {
     min_history_dates: minHistory,
   };
 
+  _debug('POST /predict', {
+    origin: urlObj.origin,
+    path: urlObj.pathname,
+    crop: body.crop,
+    state: body.state,
+    market: body.market,
+    days,
+    minHistory,
+    timeoutMs,
+  });
+
   try {
     const env = await _post(urlObj, body, timeoutMs);
-    if (!env || typeof env !== 'object') return null;
-    if (typeof env.available !== 'boolean') return null;
+    if (!env || typeof env !== 'object') {
+      _debug('predict failed: response was not an object');
+      return null;
+    }
+    if (typeof env.available !== 'boolean') {
+      _debug('predict failed: response omitted available flag');
+      return null;
+    }
+    _debug('predict succeeded', { available: env.available, method: env.method || null });
     return env;
-  } catch (_) {
+  } catch (err) {
+    _debug('predict request failed', { error: err && err.message ? err.message : String(err) });
     return null;
   }
 }
